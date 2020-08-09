@@ -11,11 +11,15 @@ module testbench();
   reg p1, p2, p3, p4, p5, p6;
   // Inputs para Operators
   reg i1, i2, i3, i4, i5, i6, i7, i8;
+  // Inputs para ejercicio 5
+  reg a1, a2, a3;
   
   // Outputs para Gate_Level
   wire led1, led2, led3, led4;
   // Outputs para Operators
   wire led5, led6, led7, led8;
+  // Outputs para ejercicio 5
+  wire led9, led10, led11;
 
   gateLevel_1   G1(p1, p2, p3, led1);
   gateLevel_2   G2(p1, p2, p3, led2);
@@ -27,6 +31,10 @@ module testbench();
   operadores_2 OP2(i1, i2, i3, i4, led6);
   operadores_3 OP3(i5, i6, i7, i8, led7);
   operadores_4 OP4(i5, i6, i7, i8, led8);
+  
+  alarma_sop	AL1(a1, a2, a3, led9);
+  alarma_pos	AL2(a1, a2, a3, led10);
+  alarma_k		AL3(a1, a2, a3, led11);
 
   
   // Gate Level Modelling --> Ejercicio 1: Tablas 1 y 2 
@@ -52,7 +60,7 @@ module testbench();
     $display("\n");
 	$display("Ejercicio 2: Tablas 2 y 4");
     $display("A B C | Y1 Y2");
-    $display("------|--");
+    $display("------|------");
     $monitor("%b %b %b | %b %b", p4, p5, p6, led3, led4);
        p4 = 0; p5 = 0; p6 = 0;
     #1 p4 = 0; p5 = 0; p6 = 1;
@@ -116,8 +124,25 @@ module testbench();
     #1 i5 = 1; i6 = 1; i7 = 1; i8 = 1;
   end
   
+  initial begin
+    #52
+    $display("\n");
+	$display("Ejercicio 5: SOP | POS | Karnaugh");
+    $display("A B C | Y1 Y2 Y3");
+    $display("------|---------");
+    $monitor("%b %b %b | %b  %b  %b", a1, a2, a3, led9, led10, led11);
+       a1 = 0; a2 = 0; a3 = 0;
+    #1 a1 = 0; a2 = 0; a3 = 1;
+    #1 a1 = 0; a2 = 1; a3 = 0;
+    #1 a1 = 0; a2 = 1; a3 = 1;
+    #1 a1 = 1; a2 = 0; a3 = 0;
+    #1 a1 = 1; a2 = 0; a3 = 1;
+    #1 a1 = 1; a2 = 1; a3 = 0;
+    #1 a1 = 1; a2 = 1; a3 = 1;
+  end  
+  
   initial
-    #52 $finish;
+    #60 $finish;
   
   initial begin
     $dumpfile("Test_Bench_tb.vcd");

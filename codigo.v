@@ -111,3 +111,37 @@ module operadores_4(input wire A, B, C, D, output wire Y);
   assign Y = (B | D) & (A | B | ~C);
   
 endmodule
+
+//Ejercicio 5
+// SOP utilizando Behavioral Modelling
+module alarma_sop(input wire A, B, C, output wire Y);
+
+	assign Y = (A & ~B & ~C) | (A & ~B & C) | (A & B & C);
+
+endmodule
+
+// POS utilizando Behavioral Modelling
+module alarma_pos(input wire A, B, C, output wire Y);
+
+	assign Y = (A | B | C) & (A | B | ~C) & (A | ~B | C) & (A | ~B | ~C) & (~A | ~B | C);
+
+endmodule
+
+// Simplificada con mapa de Karnaugh utilizando Gate Level Modelling
+module alarma_k(input wire A, B, C, output wire Y);
+	
+	wire notB, or1;
+	
+	//Not's
+	
+	not (notB, B);
+	
+	//Or's
+	
+	or (or1, notB, C);
+	
+	//And's
+	
+	and (Y, A, or1);
+	
+endmodule
