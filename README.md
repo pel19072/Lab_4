@@ -1,2 +1,2 @@
-# Lab_4
- Cuarto laboratorio de Electrónica Digital 1 2020
+# Repositorios
+ Laboratorios de Electrónica Digital 1 2020
