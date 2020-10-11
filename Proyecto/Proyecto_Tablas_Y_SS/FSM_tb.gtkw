@@ -1,0 +1,46 @@
+[*]
+[*] GTKWave Analyzer v3.3.77 (w)1999-2016 BSI
+[*] Sun Oct 11 01:49:30 2020
+[*]
+[dumpfile] "E:\UVG\Semestre 4\Digital_1\Laboratorio_4\Digital_Repositorio\Proyecto\Proyecto_Tablas_Y_SS\FSM_tb.vcd"
+[savefile] "E:\UVG\Semestre 4\Digital_1\Laboratorio_4\Digital_Repositorio\Proyecto\Proyecto_Tablas_Y_SS\FSM_tb.gtkw"
+[timestart] 0
+[size] 1474 841
+[pos] -165 -165
+*-5.806636 2 2 173 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[sst_width] 197
+[signals_width] 94
+[sst_expanded] 1
+[sst_vpaned_height] 238
+@28
+testbench.Caf1.clock
+testbench.Caf1.reset
+[color] 2
+testbench.Caf1.T[1:0]
+[color] 2
+testbench.Caf1.C[1:0]
+testbench.Caf1.PushS
+[color] 2
+testbench.Caf1.OK[1:0]
+testbench.Caf1.PushC
+@22
+[color] 6
+testbench.Caf1.LCD[3:0]
+@28
+[color] 3
+testbench.Caf1.TMR1ON
+[color] 3
+testbench.Caf1.TMR1
+[color] 6
+testbench.Caf1.M[1:0]
+[color] 3
+testbench.Caf1.TMR2ON
+[color] 3
+testbench.Caf1.TMR2
+[color] 5
+testbench.Caf1.F
+[color] 5
+testbench.Caf1.L1
+[pattern_trace] 1
+[pattern_trace] 0

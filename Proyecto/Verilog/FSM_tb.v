@@ -45,11 +45,21 @@ always
 #2  PushS = 0; PushC = 0; reset = 0;
 #34  PushS = 0; PushC = 1; reset = 0;
 #2  PushS = 0; PushC = 0; reset = 0;
+#16  PushS = 1; PushC = 0; reset = 0;
+#4  PushS = 0; PushC = 0; reset = 0;
+#6  PushS = 0; PushC = 1; reset = 0;
+#2  PushS = 0; PushC = 0; reset = 0;
+#2  PushS = 1; PushC = 0; reset = 0;
+#2  PushS = 0; PushC = 0; reset = 0;
+#30  PushS = 0; PushC = 1; reset = 0;
+#2  PushS = 0; PushC = 0; reset = 0;
+#16  PushS = 0; PushC = 1; reset = 0;
+#2  PushS = 0; PushC = 0; reset = 0;
 
   end
 
   initial
-    #190 $finish;
+    #320 $finish;
   initial begin
       $dumpfile("FSM_tb.vcd");
       $dumpvars(0, testbench);

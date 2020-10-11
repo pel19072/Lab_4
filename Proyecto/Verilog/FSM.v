@@ -129,7 +129,7 @@ module Prep (input wire TMR2, clock, reset, input wire [1:0]OK, output wire [1:0
   assign SN[2] = (S[2] & OK[1] & OK[0]) | (S[1] & S[0] & TMR2);
   assign SN[1] = (S[1] & ~S[0]) | (S[1] & ~TMR2) | (~S[1] & S[0] & TMR2);
   assign SN[0] = (S[1] & ~S[0]) | (S[0] & ~TMR2) | (~S[2] & ~S[0] & OK[1] & OK[0]);
-  assign M[1] = S[1];
+  assign M[1] = S[1] & S[0];
   assign M[0] = ~S[1] & S[0];
   assign F = S[1] | S[0];
   assign L1 = S[1];
