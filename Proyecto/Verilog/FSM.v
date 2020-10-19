@@ -75,7 +75,6 @@ endmodule
 //Definición de next state
 //Definición de salida en relación a estados actuales -e inputs de ser mealy-
 
-
 //Primera Máquina: Antirebote - Sí funciona
 module Debounce (input wire Push, clock, reset, output wire Signal);
   //creación de variables locales para estados
