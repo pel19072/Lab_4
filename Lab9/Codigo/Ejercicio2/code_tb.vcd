@@ -1,0 +1,68 @@
+$date
+	Fri Oct 30 23:38:12 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module testbench $end
+$var wire 1 ! qt $end
+$var reg 1 " clock $end
+$var reg 1 # enable $end
+$var reg 1 $ reset $end
+$scope module FT $end
+$var wire 1 " clk $end
+$var wire 1 % d $end
+$var wire 1 # enable $end
+$var wire 1 $ reset $end
+$var wire 1 ! q $end
+$scope module F1 $end
+$var wire 1 " clk $end
+$var wire 1 % d $end
+$var wire 1 # enable $end
+$var wire 1 $ reset $end
+$var reg 1 ! q $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+x%
+x$
+x#
+x"
+x!
+$end
+#2
+1"
+0$
+0#
+#3
+0"
+#4
+1%
+0!
+1"
+1$
+#5
+0"
+#6
+0%
+1!
+1"
+0$
+1#
+#7
+0"
+#8
+1%
+0!
+1"
+#9
+0"
+#10
+1"
+0#
