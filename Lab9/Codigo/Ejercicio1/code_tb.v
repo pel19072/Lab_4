@@ -26,7 +26,7 @@ module testbench();
     $display("--------------------------|--------");
     $monitor("%b       %b     %b       %b   |   %b", clock, reset, enable, d1, q1);
 
-      enable = 0; reset = 0; d1 = 0; clock = 0;
+      enable = 0; reset = 0; d1 = 0; clock = 0; d2 = 2'b0; d4 = 4'b0;
   #2  enable = 0; reset = 1; d1 = 0;
   #2  enable = 1; reset = 0; d1 = 0;
   #2  enable = 1; reset = 0; d1 = 1;
