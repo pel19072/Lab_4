@@ -1,0 +1,257 @@
+$date
+	Fri Nov 06 18:41:24 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module testbench $end
+$var wire 4 ! operand [3:0] $end
+$var wire 8 " opcode [7:0] $end
+$var wire 4 # instruction [3:0] $end
+$var reg 1 $ clock $end
+$var reg 1 % enablec $end
+$var reg 1 & enablef $end
+$var reg 1 ' load $end
+$var reg 12 ( load_data [11:0] $end
+$var reg 1 ) reset $end
+$scope module P1 $end
+$var wire 1 $ clk $end
+$var wire 1 % enablec $end
+$var wire 1 & enablef $end
+$var wire 1 ' load $end
+$var wire 12 * load_data [11:0] $end
+$var wire 1 ) reset $end
+$var wire 4 + operand [3:0] $end
+$var wire 8 , opcode [7:0] $end
+$var wire 4 - instruction [3:0] $end
+$var wire 12 . address [11:0] $end
+$scope module C1 $end
+$var wire 1 $ clock $end
+$var wire 1 % enable $end
+$var wire 1 ' load $end
+$var wire 12 / load_data [11:0] $end
+$var wire 1 ) reset $end
+$var reg 12 0 value [11:0] $end
+$upscope $end
+$scope module F1 $end
+$var wire 1 $ clk $end
+$var wire 1 & enable $end
+$var wire 1 ) reset $end
+$var wire 8 1 q [7:0] $end
+$var wire 4 2 operand [3:0] $end
+$var wire 8 3 opcode [7:0] $end
+$var wire 4 4 instruction [3:0] $end
+$scope module F1 $end
+$var wire 1 $ clk $end
+$var wire 1 & enable $end
+$var wire 1 ) reset $end
+$var wire 8 5 d [7:0] $end
+$var reg 8 6 q [7:0] $end
+$upscope $end
+$upscope $end
+$scope module R1 $end
+$var wire 12 7 address [11:0] $end
+$var wire 8 8 opcode [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx 8
+bx 7
+bx 6
+bx 5
+bx 4
+bx 3
+bx 2
+bx 1
+bx 0
+bx /
+bx .
+bx -
+bx ,
+bx +
+bx *
+x)
+bx (
+x'
+x&
+x%
+x$
+bx #
+bx "
+bx !
+$end
+#2
+b0 !
+b0 +
+b0 2
+b0 #
+b0 -
+b0 4
+b1000010 "
+b1000010 ,
+b1000010 3
+b1000010 5
+b1000010 8
+b0 .
+b0 0
+b0 7
+b0 1
+b0 6
+b0 (
+b0 *
+b0 /
+0'
+1$
+1)
+0&
+0%
+#3
+0$
+#4
+1$
+0)
+#5
+0$
+#6
+b0 "
+b0 ,
+b0 3
+b0 5
+b0 8
+b1 .
+b1 0
+b1 7
+b10 !
+b10 +
+b10 2
+b100 #
+b100 -
+b100 4
+b1000010 1
+b1000010 6
+1$
+1&
+1%
+#7
+0$
+#8
+b0 !
+b0 +
+b0 2
+b0 #
+b0 -
+b0 4
+b1111 "
+b1111 ,
+b1111 3
+b1111 5
+b1111 8
+b10 .
+b10 0
+b10 7
+b0 1
+b0 6
+1$
+#9
+0$
+#10
+b1111 !
+b1111 +
+b1111 2
+b100 "
+b100 ,
+b100 3
+b100 5
+b100 8
+b11 .
+b11 0
+b11 7
+b1111 1
+b1111 6
+1$
+#11
+0$
+#12
+b10 !
+b10 +
+b10 2
+b100 #
+b100 -
+b100 4
+b1000010 1
+b1000010 6
+b1000010 "
+b1000010 ,
+b1000010 3
+b1000010 5
+b1000010 8
+b0 .
+b0 0
+b0 7
+1$
+1'
+#13
+0$
+#14
+b0 !
+b0 +
+b0 2
+b0 #
+b0 -
+b0 4
+b0 1
+b0 6
+b0 "
+b0 ,
+b0 3
+b0 5
+b0 8
+b1010 .
+b1010 0
+b1010 7
+1$
+b1010 (
+b1010 *
+b1010 /
+#15
+0$
+#16
+b101001 "
+b101001 ,
+b101001 3
+b101001 5
+b101001 8
+b1100 .
+b1100 0
+b1100 7
+1$
+b0 (
+b0 *
+b0 /
+0'
+#17
+0$
+#18
+b1001 !
+b1001 +
+b1001 2
+b10 #
+b10 -
+b10 4
+b11010101 "
+b11010101 ,
+b11010101 3
+b11010101 5
+b11010101 8
+b1101 .
+b1101 0
+b1101 7
+b101001 1
+b101001 6
+1$
