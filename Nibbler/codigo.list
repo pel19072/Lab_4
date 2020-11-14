@@ -1,33 +1,7 @@
-4F %LIT F a Accu
-7A %ST A en la RAM
-00
-0F
-04
-00
-00
-FA
-02
-00
-00
-00
-00
-29
-D5
-04
-00
-02
-00
-00
-04
-00
-00
-FA
-02
-00
-00
-00
-00
-29
-D5
-04
-00
+//Procesador Base
+4F //LIT F
+2E //CMPI E
+A5 //ADI 5
+57 //IN 8
+D4 //OUT 4
+EA //NANDI A

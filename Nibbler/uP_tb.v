@@ -23,11 +23,11 @@ module testbench();
     $monitor("%b       %b       %b    |   %b       %b        %b      %b    %b     %b      %b    %b     %b     %b    %b", clock, reset, pushbuttons, phase, c_flag, z_flag, instr, oprnd, data_bus, FF_out, accu, program_byte, pc, address_ram);
 
       reset = 1; clock = 0; pushbuttons = 4'b0;
-  #2  reset = 0; pushbuttons = 4'b0;
+  #8  reset = 0; pushbuttons = 4'b0;
     end
 
     initial
-      #60 $finish;
+      #106 $finish;
     initial begin
         $dumpfile("uP_tb.vcd");
         $dumpvars(0, testbench);
