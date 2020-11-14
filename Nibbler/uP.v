@@ -213,6 +213,7 @@ endmodule
 //Nibbler
 module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire phase, c_flag, z_flag, output wire [3:0]instr, oprnd, data_bus, FF_out, accu, output wire [7:0]program_byte, output wire [11:0]pc, address_ram);
   //Cables internos del Nibbler
+  wire oeRAM;
   wire [1:0]flags_in, flags_out; //posicion 1 es carry y 0 es zero
   wire [12:0]control;
   wire [3:0]alu_result;
@@ -225,6 +226,8 @@ module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire pha
   //Defino mis banderas concatenadas
   assign c_flag = flags_out[1];
   assign z_flag = flags_out[0];
+  //oeRAM definición - Se activa cuando los buffers triestado estan apagados
+  assign oeRAM = ~control[1] & ~control[2] & ~control[3];
   //Defino a los bits de control con mi address a traves del decode
   Microcode M1(address, control);
   //Doy valor al PC a traves de las señales de control 11 y 12 -load y enable respectivamente-
@@ -234,7 +237,7 @@ module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire pha
   //Fetch divide al program_byte -opcode- en instruccion y operando
   Fetch FE1(clock, reset, ~phase, program_byte, instr, oprnd);
   //Uso el toggle para definir el phase
-  Phase PH1(clock, reset, enable, phase); //Enable del phase?????
+  Phase PH1(clock, reset, 1'b1, phase); //Enable del phase siempre en 1?????
   //Dejo pasar mis banderas con el bit 9 de control -LoadFlags-
   Flags FL1(clock, reset, control[9], flags_in, flags_out);
   //Primer Bus Driver - Defino a data_bus usando el bit 1 de control -oeOprnd-
@@ -246,6 +249,9 @@ module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire pha
   //Segundo Bus Driver - Defino a data_bus usando el bit 3 de control -oeALU-
   Tris BD2(control[3], alu_result, data_bus);
   //Definicion de la RAM uso de control 4 y 5 -weRAM y csRAM respectivamente-
-  RAM_Memory RAM1(control[5], control[4], read, address_ram, data_bus); //output enable de la RAM es cuando los otros tres tris estan en cero????
-
+  RAM_Memory RAM1(control[5], control[4], oeRAM, address_ram, data_bus); //output enable de la RAM es cuando los otros tres tris estan en cero????
+  //Tercer Bus Driver - Defino a data_bus usando el bit 2 de control -oeIN-
+  Tris BD2(control[2], pushbuttons, data_bus);
+  //Flip flop para Outputs con bit 0 de control -loadOut-
+  Outputs O1(clock, reset, control[0], data_bus, FF_out);
 endmodule
