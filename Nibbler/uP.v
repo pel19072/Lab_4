@@ -139,12 +139,12 @@ module Tris (input wire enable, input wire [3:0]in, output wire [3:0]out);
 endmodule
 
 //RAM
-module RAM_Memory (input wire enable, write, read, input wire [11:0]address_RAM, inout data);
+module RAM_Memory (input wire enable, write, read, input wire [11:0]address_RAM, inout [3:0]data);
   reg [3:0] RAM [0:4095];
   reg [3:0]data_out;
 
   //Coloca un tris para poder escribir o leer
-  assign data = (enable & read & ~write) ? data_out:8'bz;
+  assign data = (enable & read & ~write) ? data_out:4'bz;
   //Bloque de escritura
   always @ ( address_RAM or data or enable or write ) begin
     if (enable && write) begin
@@ -251,7 +251,7 @@ module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire pha
   //Definicion de la RAM uso de control 4 y 5 -weRAM y csRAM respectivamente-
   RAM_Memory RAM1(control[5], control[4], oeRAM, address_ram, data_bus); //output enable de la RAM es cuando los otros tres tris estan en cero????
   //Tercer Bus Driver - Defino a data_bus usando el bit 2 de control -oeIN-
-  Tris BD2(control[2], pushbuttons, data_bus);
+  Tris BD3(control[2], pushbuttons, data_bus);
   //Flip flop para Outputs con bit 0 de control -loadOut-
   Outputs O1(clock, reset, control[0], data_bus, FF_out);
 endmodule
