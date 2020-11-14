@@ -212,16 +212,40 @@ endmodule
 
 //Nibbler
 module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire phase, c_flag, z_flag, output wire [3:0]instr, oprnd, data_bus, FF_out, accu, output wire [7:0]program_byte, output wire [11:0]pc, address_ram);
-  wire carry, zero;
+  //Cables internos del Nibbler
+  wire [1:0]flags_in, flags_out; //posicion 1 es carry y 0 es zero
   wire [12:0]control;
   wire [3:0]alu_result;
   wire [6:0]address;
-  assign instr = address[6:3];
-  assign c_flag = address[2];
-  assign z_flag = address[1];
-  assign phase = address[0];
+  //Defino a address como la contatenacion de varias entradas
+  assign address[6:3] = instr;
+  assign address[2] = c_flag;
+  assign address[1] = z_flag;
+  assign address[0] = phase;
+  //Defino mis banderas concatenadas
+  assign c_flag = flags_out[1];
+  assign z_flag = flags_out[0];
+  //Defino a los bits de control con mi address a traves del decode
   Microcode M1(address, control);
-  Counter PC1(clock, reset, control[5], control[6], address_ram, pc);
+  //Doy valor al PC a traves de las señales de control 11 y 12 -load y enable respectivamente-
+  Counter PC1(clock, reset, control[11], control[12], address_ram, pc);
+  //Busco la instruccion correspondiente en la ROM con el PC
   ROM_Memory ROM1(pc, program_byte);
-  Fetch FE1(clock, reset, enable, program_byte, instr, oprnd); //Enable del fetch???
+  //Fetch divide al program_byte -opcode- en instruccion y operando
+  Fetch FE1(clock, reset, ~phase, program_byte, instr, oprnd);
+  //Uso el toggle para definir el phase
+  Phase PH1(clock, reset, enable, phase); //Enable del phase?????
+  //Dejo pasar mis banderas con el bit 9 de control -LoadFlags-
+  Flags FL1(clock, reset, control[9], flags_in, flags_out);
+  //Primer Bus Driver - Defino a data_bus usando el bit 1 de control -oeOprnd-
+  Tris BD1(control[1], oprnd, data_bus);
+  //Operaciones con ALU entra data_bus y accu, selecciono con los bits 6, 7 y 8 de control, sale el resultado y las banderas
+  ALU A1(data_bus, accu, control[8:6], alu_result, flags_in);
+  //Genero el registro W - Defino a accu a traves del resultado de la ALU y del bit 10 de control -loadA-
+  Accumulator A2(clock, reset, control[10], alu_result, accu);
+  //Segundo Bus Driver - Defino a data_bus usando el bit 3 de control -oeALU-
+  Tris BD2(control[3], alu_result, data_bus);
+  //Definicion de la RAM uso de control 4 y 5 -weRAM y csRAM respectivamente-
+  RAM_Memory RAM1(control[5], control[4], read, address_ram, data_bus); //output enable de la RAM es cuando los otros tres tris estan en cero????
+
 endmodule
