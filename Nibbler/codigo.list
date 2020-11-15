@@ -1,7 +1,10 @@
 //Procesador Base
-4F //LIT F
-2E //CMPI E
+4E //LIT E
+2F //CMPI F
+D4 //OUT 4
 A5 //ADI 5
 57 //IN 8
-D4 //OUT 4
 EA //NANDI A
+//Saltos
+C0 //Prepara salto bit mas significativo de direccion a saltar es 0
+01 //Salta a 001

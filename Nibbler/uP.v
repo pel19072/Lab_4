@@ -42,7 +42,7 @@ module flip_flop8 (input wire clk, reset, enable, input wire [7:0]d, output reg 
 	end
 endmodule
 
-//Fetch
+//Fetch - Sí funciona
 module Fetch (input wire clk, reset, enable, input wire [7:0]opcode, output wire [3:0]instruction, operand);
   wire [7:0]q;
   assign instruction = q[7:4];
@@ -50,7 +50,7 @@ module Fetch (input wire clk, reset, enable, input wire [7:0]opcode, output wire
   flip_flop8 F1(clk, reset, enable, opcode, q);
 endmodule
 
-// Flip Flop Tipo D --> para flags
+// Flip Flop Tipo D --> para flags - Sí funciona
 module Flags (input wire clk, reset, enable, input wire [1:0]d, output reg [1:0]q);
 	always @ (posedge clk or posedge reset or enable)begin
 		if (reset) begin
@@ -74,7 +74,7 @@ module flip_flop1 (input wire clk, reset, enable, input wire d, output reg q);
 	end
 endmodule
 
-// Flip Flop Toggle --> para phase
+// Flip Flop Toggle --> para phase - Sí funciona
 module Phase (input wire clk, reset, enable, output wire q);
   wire d;
   assign d = ~q;
@@ -83,7 +83,7 @@ endmodule
 
 //Decode
 module Microcode(input wire [6:0]address, output reg [12:0]control);
-  always @ ( * ) begin
+  always @ (address) begin
     casex (address)
     7'bxxxxxx0: //0
       control <= 13'b1000000001000;
@@ -128,12 +128,12 @@ module Microcode(input wire [6:0]address, output reg [12:0]control);
     7'b1111xx1: //20
       control <= 13'b1011100100000;
     default:
-      control <= 13'b0;
+      control <= 13'b1111111111111;
     endcase
   end
 endmodule
 
-// Buffer Tri-estado --> Funciona
+// Buffer Tri-estado - Sí funciona
 module Tris (input wire enable, input wire [3:0]in, output wire [3:0]out);
   assign out = enable ? in:4'bz;
 endmodule
@@ -159,7 +159,7 @@ module RAM_Memory (input wire enable, write, read, input wire [11:0]address_RAM,
   end
 endmodule
 
-// Flip Flop Tipo D
+// Flip Flop Tipo D - Sí funciona
 module Accumulator (input wire clk, reset, enable, input wire [3:0]result, output reg [3:0]accu);
 	always @ (posedge clk or posedge reset or enable) begin
 		if (reset) begin
@@ -172,28 +172,26 @@ module Accumulator (input wire clk, reset, enable, input wire [3:0]result, outpu
 endmodule
 
 //ALU - Los 3 bits de seleccion vienen del microcode el databus es el operand y la accu es W
-module ALU (input wire [3:0]data_bus, accu, input wire [2:0]selector, output wire [3:0]result, output wire [1:0]flags);
-  wire zero, carry;
-  reg [4:0]result_flags;
+module ALU (input wire [3:0]data_bus, accu, input wire [2:0]selector, output reg [3:0]result, output wire [1:0]flags);
+  wire zero;
+  reg carry;
   always @ ( * ) begin
     case (selector)
     0:
-      result_flags <= accu;
+      {carry, result} <= accu;
     1:
-      result_flags <= accu - data_bus;
+      {carry, result} <= accu - data_bus;
     2:
-      result_flags <= data_bus;
+      {carry, result} <= data_bus;
     3:
-      result_flags <= accu + data_bus;
+      {carry, result} <= accu + data_bus;
     4:
-      result_flags <= accu ~& data_bus;
+      {carry, result} <= accu ~& data_bus;
     default:
-      result_flags <= 5'b0;
+      {carry, result} <= 5'b0;
     endcase
   end
-  assign result = result_flags[3:0];
-  assign carry = result_flags[4];
-  assign zero = (result_flags == 5'b0) ? 1'b1:1'b0;
+  assign zero = ((result == 4'b0) && (carry == 1'b0)) ? 1'b1:1'b0;
   assign flags[0] = zero;
   assign flags[1] = carry;
 endmodule
@@ -219,10 +217,10 @@ module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire pha
   wire [3:0]alu_result;
   wire [6:0]address;
   //Defino a address como la contatenacion de varias entradas
-  assign address[6:3] = instr;
-  assign address[2] = c_flag;
-  assign address[1] = z_flag;
-  assign address[0] = phase;
+  assign address = {instr, c_flag, z_flag, phase};
+  //address_RAM
+  //assign address_ram[11:8] = oprnd;
+  //assign address_ram[7:0] = program_byte;
   //Defino mis banderas concatenadas
   assign c_flag = flags_out[1];
   assign z_flag = flags_out[0];
