@@ -1,0 +1,23 @@
+//Procesador Base
+4A //LIT A
+A5 //ADDI 5
+2F //CMPI F
+D4 //OUT 4
+57 //IN 7
+EA //NANDI A
+//Procesador RAM
+70
+00
+60
+00
+//Procesador Saltos
+C0
+44
+@44
+//Procesador Base
+4A //LIT A
+A5 //ADDI 5
+2F //CMPI F
+D4 //OUT 4
+57 //IN 7
+EA //NANDI A
