@@ -6,7 +6,7 @@
 
 //Program Counter - Sí funciona
 module Counter (input wire clock, reset, load, enable, input wire [11:0]load_data, output reg [11:0]value);
-  always @ (posedge clock, posedge reset, load) begin
+  always @ (posedge clock, posedge reset) begin
     if (reset) begin
       value <= 12'b0;
     end
@@ -184,12 +184,12 @@ module ALU (input wire [3:0]data_bus, accu, input wire [2:0]selector, output reg
     3:
       {carry, result} <= accu + data_bus;
     4:
-      {carry, result} <= accu ~& data_bus;
+      {carry, result} <= {1'b0, ~(accu & data_bus)};
     default:
       {carry, result} <= 5'b0;
     endcase
   end
-  assign zero = ((result == 4'b0) && (carry == 1'b0)) ? 1'b1:1'b0;
+  assign zero = (result == 4'b0) ? 1'b1:1'b0;
   assign flags[0] = zero;
   assign flags[1] = carry;
 endmodule
