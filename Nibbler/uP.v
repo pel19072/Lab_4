@@ -28,7 +28,7 @@ module ROM_Memory (input wire [11:0]address, output wire [7:0]opcode);
   assign opcode = ROM[address];
 endmodule
 
-// Flip Flop Tipo D --> para fetch
+// Flip Flop Tipo D --> para fetch - Sí funciona
 module flip_flop8 (input wire clk, reset, enable, input wire [7:0]d, output reg [7:0]q);
 	always @ (posedge clk or posedge reset or enable)begin
 		if (reset) begin
@@ -60,7 +60,7 @@ module Flags (input wire clk, reset, enable, input wire [1:0]d, output reg [1:0]
 	end
 endmodule
 
-// Flip Flop Tipo D --> para toggle del phase
+// Flip Flop Tipo D --> para toggle del phase - Sí funciona
 module flip_flop1 (input wire clk, reset, enable, input wire d, output reg q);
 	always @ (posedge clk or posedge reset or enable)begin
 		if (reset) begin
@@ -79,7 +79,7 @@ module Phase (input wire clk, reset, enable, output wire q);
 	flip_flop1 F1(clk, reset, enable, d, q);
 endmodule
 
-//Decode
+//Decode - Sí funciona
 module Microcode(input wire [6:0]address, output reg [12:0]control);
   always @ (address) begin
     casex (address)
@@ -136,7 +136,7 @@ module Tris (input wire enable, input wire [3:0]in, output wire [3:0]out);
   assign out = enable ? in:4'bz;
 endmodule
 
-//RAM
+//RAM - Sí funciona
 module RAM_Memory (input wire enable, write, read, input wire [11:0]address_RAM, inout [3:0]data);
   reg [3:0] RAM [0:4095];
   reg [3:0]data_out;
@@ -169,7 +169,7 @@ module Accumulator (input wire clk, reset, enable, input wire [3:0]result, outpu
 	end
 endmodule
 
-//ALU - Los 3 bits de seleccion vienen del microcode el databus es el operand y la accu es W
+//ALU - Los 3 bits de seleccion vienen del microcode el databus es el operand y la accu es W - Sí funciona
 module ALU (input wire [3:0]data_bus, accu, input wire [2:0]selector, output reg [3:0]result, output wire [1:0]flags);
   wire zero;
   reg carry;
@@ -194,7 +194,7 @@ module ALU (input wire [3:0]data_bus, accu, input wire [2:0]selector, output reg
   assign flags[1] = carry;
 endmodule
 
-// Flip Flop Tipo D --> para outputs
+// Flip Flop Tipo D --> para outputs - Sí funciona
 module Outputs (input wire clk, reset, enable, input wire [3:0]d, output reg [3:0]q);
 	always @ (posedge clk or posedge reset or enable)begin
 		if (reset) begin
@@ -206,7 +206,7 @@ module Outputs (input wire clk, reset, enable, input wire [3:0]d, output reg [3:
 	end
 endmodule
 
-//Nibbler
+//Nibbler - Sí funciona
 module uP (input wire clock, reset, input wire [3:0]pushbuttons, output wire phase, c_flag, z_flag, output wire [3:0]instr, oprnd, data_bus, FF_out, accu, output wire [7:0]program_byte, output wire [11:0]PC, address_RAM);
   //Cables internos del Nibbler
   wire [1:0]flags_in, flags_out; //posicion 1 es carry y 0 es zero

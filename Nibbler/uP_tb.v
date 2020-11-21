@@ -27,7 +27,7 @@ module testbench();
     end
 
     initial
-      #210 $finish;
+      #640 $finish;
     initial begin
         $dumpfile("uP_tb.vcd");
         $dumpvars(0, testbench);
